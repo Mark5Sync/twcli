@@ -40,6 +40,10 @@ class cli
     }
 
 
+    static function table(array $table)
+    {
+        return (new CLI)->tbl($table);
+    }
 
 
 
@@ -100,5 +104,37 @@ class cli
         );
 
         echo $text;
+    }
+
+
+    function tbl(array $array)
+    {
+        $columns = array_keys($array[0]);
+        $columnWidths = array_map(function ($col) use ($array) {
+            return max(array_map('strlen', array_column($array, $col))) + 2;
+        }, $columns);
+
+        $rowFormat = '';
+        foreach ($columnWidths as $width) {
+            $rowFormat .= "%-{$width}s";
+        }
+        $rowFormat .= PHP_EOL;
+
+        $header = vsprintf($rowFormat, $columns);
+
+        $separator = '';
+        foreach ($columnWidths as $width) {
+            $separator .= str_repeat('-', $width);
+        }
+        $separator .= PHP_EOL;
+
+        $rows = '';
+        foreach ($array as $row) {
+            $rows .= vsprintf($rowFormat, $row);
+        }
+
+        $table = $header . $separator . $rows;
+
+        echo $table;
     }
 }
