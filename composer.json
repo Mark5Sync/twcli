@@ -1,6 +1,8 @@
 {
     "name": "twcli\/twcli",
     "description": "cli",
+    "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "twcli\\": "src\/"
