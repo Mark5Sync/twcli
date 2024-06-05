@@ -1,0 +1,9 @@
+{
+    "name": "twcli\/twcli",
+    "description": "cli",
+    "autoload": {
+        "psr-4": {
+            "twcli\\": "src\/"
+        }
+    }
+}
